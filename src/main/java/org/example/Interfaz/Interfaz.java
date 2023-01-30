@@ -1,45 +1,76 @@
 package org.example.Interfaz;
 
+import org.example.ClientesSOcketStream;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Interfaz extends JFrame {
     private JButton btnPerezR, btnFurbo, btnJubilacion, btnGasofa, salir;
-    JEditorPane editor;
+    JButton[] botones = new JButton[5];
+
+    JTextField editor;
 
     JFrame frameMenu = new JFrame();
 
     public Interfaz() {
 
-        editor = new JEditorPane(); //Incilaizamos el editorPane
+
+        editor = new JTextField(); //Incilaizamos el editorPane
         editor.setBounds(25, 200, 435, 30);
-        editor.setContentType("text/plain"); // Marcamos el editor para que use texto plano
-        editor.setText(""); // Insertamos un trozo de HTML
         editor.setEditable(true); //Habilitamos la edicion
+        editor.setText(""); // Insertamos texto
 
         btnPerezR = new JButton("Perez Reverte");
         btnPerezR.setBounds(25, 250, 120, 50);
+        btnPerezR.getName();
         btnPerezR.setToolTipText("Calcula cuantos libros te quedan para alcanzar al maestro Perez Reverte!!");
-        // btnPerezR.addActionListener(new HelpButton());
+        btnPerezR.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ClientesSOcketStream.enviarMensaje(1, editor.getText());
+            }
+        });
 
         btnFurbo = new JButton("Furbol");
         btnFurbo.setBounds(150, 250, 100, 50);
         btnFurbo.setToolTipText("La medida que pongas en campos de futbol");
-        //  btnFurbo.addActionListener(new HelpButton());
+        btnFurbo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Conectando");
+                ClientesSOcketStream.enviarMensaje(2, editor.getText());
+            }
+        });
 
         btnJubilacion = new JButton("Jubilacion");
         btnJubilacion.setBounds(255, 250, 100, 50);
         btnJubilacion.setToolTipText("Calcula" +
                 " los meses que te quedan para jubilarte");
-        //  btnJubilacion.addActionListener(new HelpButton());
+        btnJubilacion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ClientesSOcketStream.enviarMensaje(3, editor.getText());
+
+            }
+        });
 
         btnGasofa = new JButton("Gasolina");
         btnGasofa.setBounds(360, 250, 100, 50);
         btnGasofa.setToolTipText("Calcula la diferencia con la gasolina mas barata");
-        //  btnGasofa.addActionListener(new HelpButton());
+        btnGasofa.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ClientesSOcketStream.enviarMensaje(4, editor.getText());
+
+            }
+        });
 
         salir = new JButton("Salir");
         salir.setBounds(380, 320, 75, 25);
-        //  btnGasofa.addActionListener(new HelpButton());
+        salir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ClientesSOcketStream.enviarMensaje(5, editor.getText());
+
+            }
+        });
 
         /*
          * Asignamos titulo a la ventana
@@ -76,6 +107,11 @@ public class Interfaz extends JFrame {
         frameMenu.setVisible(true);
         frameMenu.setResizable(false);
         frameMenu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        botones[0] = btnPerezR;
+        botones[1] = btnFurbo;
+        botones[2] = btnJubilacion;
+        botones[3] = btnGasofa;
+        botones[4] = salir;
 
     }
 

@@ -10,34 +10,69 @@ import java.net.Socket;
 
 public class ClientesSOcketStream {
 
+
     public static void main(String[] args) {
-        try {
-            new Interfaz() ;
-            System.out.println("Creando socket cliente");
-            Socket clienteSocket = new Socket();
-            System.out.println("Estableciendo la conexión");
+        // try {
 
-            InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
-            clienteSocket.connect(addr);
 
-            InputStream is = clienteSocket.getInputStream();
-            OutputStream os = clienteSocket.getOutputStream();
 
-            System.out.println("Enviando mensaje");
+          /*  System.out.println("Enviando mensaje");
 
             String mensaje = "mensaje desde el cliente";
             os.write(mensaje.getBytes());
 
             System.out.println("Mensaje enviado");
 
-            System.out.println("Cerrando el socket cliente");
 
-            clienteSocket.close();
-
-            System.out.println("Terminado");
 
         } catch (IOException e) {
             e.printStackTrace();
+        } */
+    }
+
+    public static void enviarMensaje(int opcion, String mensaje) {
+
+        try {
+            System.out.println("Creando socket cliente");
+            Socket clienteSocket = new Socket();
+            System.out.println("Estableciendo la conexión");
+            InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
+            clienteSocket.connect(addr);
+            InputStream is;
+            OutputStream os;
+            is = clienteSocket.getInputStream();
+            os = clienteSocket.getOutputStream();
+            switch (opcion) {
+                case 1:
+                    System.out.println("Enviando mensaje");
+                    os.write(1);
+                    os.write(mensaje.getBytes());
+                case 2:
+                    System.out.println("Enviando mensaje");
+                    os.write(2);
+                    os.write(mensaje.getBytes());
+                case 3:
+                    System.out.println("Enviando mensaje");
+                    os.write(3);
+                    os.write(mensaje.getBytes());
+                case 4:
+                    System.out.println("Enviando mensaje");
+                    os.write(4);
+                    os.write(mensaje.getBytes());
+                case 5:
+                    os.write(5);
+                    System.out.println("Cerrando el socket cliente");
+
+                    clienteSocket.close();
+
+                    System.out.println("Terminado");
+
+
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
     }
 }
