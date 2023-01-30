@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Interfaz.Interfaz;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -10,6 +12,7 @@ public class ClientesSOcketStream {
 
     public static void main(String[] args) {
         try {
+            new Interfaz() ;
             System.out.println("Creando socket cliente");
             Socket clienteSocket = new Socket();
             System.out.println("Estableciendo la conexión");
