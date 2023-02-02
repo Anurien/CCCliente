@@ -3,18 +3,25 @@ package org.example.Interfaz;
 import org.example.ClientesSOcketStream;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Interfaz extends JFrame {
     private JButton btnPerezR, btnFurbo, btnJubilacion, btnGasofa, salir;
-    JButton[] botones = new JButton[5];
 
     JTextField editor;
+    JLabel etiqueta;
 
     JFrame frameMenu = new JFrame();
 
     public Interfaz() {
+
+        etiqueta = new JLabel();
+        etiqueta.setBounds(25, 125, 435, 30);
+        etiqueta.setToolTipText("Aqui va el resultado");
+        etiqueta.setVisible(true);
+        etiqueta.setBackground(Color.PINK);
 
 
         editor = new JTextField(); //Incilaizamos el editorPane
@@ -26,51 +33,30 @@ public class Interfaz extends JFrame {
         btnPerezR.setBounds(25, 250, 120, 50);
         btnPerezR.getName();
         btnPerezR.setToolTipText("Calcula cuantos libros te quedan para alcanzar al maestro Perez Reverte!!");
-        btnPerezR.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ClientesSOcketStream.enviarMensaje(1, editor.getText());
-            }
-        });
+        btnPerezR.addActionListener(e -> ClientesSOcketStream.enviarMensaje(1, editor.getText()));
 
         btnFurbo = new JButton("Furbol");
         btnFurbo.setBounds(150, 250, 100, 50);
         btnFurbo.setToolTipText("La medida que pongas en campos de futbol");
-        btnFurbo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Conectando");
-                ClientesSOcketStream.enviarMensaje(2, editor.getText());
-            }
+        btnFurbo.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "Conectando");
+            ClientesSOcketStream.enviarMensaje(2, editor.getText());
         });
 
         btnJubilacion = new JButton("Jubilacion");
         btnJubilacion.setBounds(255, 250, 100, 50);
         btnJubilacion.setToolTipText("Calcula" +
                 " los meses que te quedan para jubilarte");
-        btnJubilacion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ClientesSOcketStream.enviarMensaje(3, editor.getText());
-
-            }
-        });
+        btnJubilacion.addActionListener(e -> ClientesSOcketStream.enviarMensaje(3, editor.getText()));
 
         btnGasofa = new JButton("Gasolina");
         btnGasofa.setBounds(360, 250, 100, 50);
         btnGasofa.setToolTipText("Calcula la diferencia con la gasolina mas barata");
-        btnGasofa.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ClientesSOcketStream.enviarMensaje(4, editor.getText());
-
-            }
-        });
+        btnGasofa.addActionListener(e -> ClientesSOcketStream.enviarMensaje(4, editor.getText()));
 
         salir = new JButton("Salir");
         salir.setBounds(380, 320, 75, 25);
-        salir.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ClientesSOcketStream.enviarMensaje(5, editor.getText());
-
-            }
-        });
+        salir.addActionListener(e -> ClientesSOcketStream.enviarMensaje(5, editor.getText()));
 
         /*
          * Asignamos titulo a la ventana
@@ -90,6 +76,7 @@ public class Interfaz extends JFrame {
         panelMenu.add(btnGasofa);
         panelMenu.add(editor);
         panelMenu.add(salir);
+        panelMenu.add(etiqueta);
 
         /*
          * Dentro de la venatana de inicio de menu colocamos los botones
@@ -107,11 +94,6 @@ public class Interfaz extends JFrame {
         frameMenu.setVisible(true);
         frameMenu.setResizable(false);
         frameMenu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        botones[0] = btnPerezR;
-        botones[1] = btnFurbo;
-        botones[2] = btnJubilacion;
-        botones[3] = btnGasofa;
-        botones[4] = salir;
 
     }
 
