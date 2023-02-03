@@ -2,41 +2,37 @@ package org.example;
 
 import org.example.Interfaz.Interfaz;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class ClientesSOcketStream {
 
+    static Socket clienteSocket;
 
     public static void main(String[] args) {
-        // try {
+        conexion();
         new Interfaz();
 
+    }
+    public static void conexion() {
 
-          /*  System.out.println("Enviando mensaje");
-
-            String mensaje = "mensaje desde el cliente";
-            os.write(mensaje.getBytes());
-
-            System.out.println("Mensaje enviado");
-
-
-
+        try {
+            System.out.println("Creando socket cliente");
+            clienteSocket = new Socket();
+            System.out.println("Estableciendo la conexión");
+            InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
+            clienteSocket.connect(addr);
         } catch (IOException e) {
-            e.printStackTrace();
-        } */
+            throw new RuntimeException(e);
+        }
     }
 
     public static void enviarMensaje(int opcion, String mensaje) {
 
         try {
-            System.out.println("Creando socket cliente");
-            Socket clienteSocket = new Socket();
-            System.out.println("Estableciendo la conexión");
-            InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
-            clienteSocket.connect(addr);
-            InputStream is = clienteSocket.getInputStream();
+
             OutputStream os = clienteSocket.getOutputStream();
             DataOutputStream sos = new DataOutputStream(os);
 
@@ -45,27 +41,31 @@ public class ClientesSOcketStream {
                     System.out.println("Enviando mensaje 1");
                     sos.writeInt(1);
                     sos.writeInt(Integer.parseInt(mensaje));
+                    recibirMensaje();
                 }
                 case 2 -> {
                     System.out.println("Enviando mensaje 2");
                     sos.writeInt(2);
                     sos.writeInt(Integer.parseInt(mensaje));
+                    recibirMensaje();
                 }
                 case 3 -> {
                     System.out.println("Enviando mensaje 3");
                     sos.writeInt(3);
                     sos.writeInt(Integer.parseInt(mensaje));
+                    recibirMensaje();
                 }
                 case 4 -> {
                     System.out.println("Enviando mensaje 4");
                     sos.writeInt(4);
                     sos.writeInt(Integer.parseInt(mensaje));
+                    recibirMensaje();
                 }
                 case 5 -> {
-                    sos.writeInt(5);
                     System.out.println("Cerrando el socket cliente");
                     clienteSocket.close();
                     System.out.println("Terminado");
+                    recibirMensaje();
                 }
             }
 
@@ -78,13 +78,9 @@ public class ClientesSOcketStream {
     public static String recibirMensaje() {
 
         try {
-            System.out.println("Creando socket cliente");
-            Socket clienteSocket = new Socket();
-            System.out.println("Estableciendo la conexión");
-            InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
-            clienteSocket.connect(addr);
             InputStream is = clienteSocket.getInputStream();
             DataInputStream eis = new DataInputStream(is);
+            JOptionPane.showMessageDialog(null, eis.readUTF());
             return eis.readUTF();
 
 

@@ -20,6 +20,8 @@ public class Interfaz extends JFrame {
         etiqueta.setToolTipText("Aqui va el resultado");
         etiqueta.setVisible(true);
         etiqueta.setBackground(Color.PINK);
+        //etiqueta.setText(ClientesSOcketStream.recibirMensaje());
+
 
 
         editor = new JTextField(); //Incilaizamos el editorPane
@@ -37,7 +39,7 @@ public class Interfaz extends JFrame {
         btnFurbo.setBounds(150, 250, 100, 50);
         btnFurbo.setToolTipText("La medida que pongas en campos de futbol");
         btnFurbo.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Conectando");
+            //JOptionPane.showMessageDialog(null, "Conectando");
             ClientesSOcketStream.enviarMensaje(2, editor.getText());
         });
 
