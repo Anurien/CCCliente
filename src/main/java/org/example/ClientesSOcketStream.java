@@ -75,7 +75,7 @@ public class ClientesSOcketStream {
 
     }
 
-    public static void recibirMensaje(int opcion, String mensaje) {
+    public static String recibirMensaje() {
 
         try {
             System.out.println("Creando socket cliente");
@@ -84,42 +84,12 @@ public class ClientesSOcketStream {
             InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
             clienteSocket.connect(addr);
             InputStream is = clienteSocket.getInputStream();
-            OutputStream os = clienteSocket.getOutputStream();
             DataInputStream eis = new DataInputStream(is);
-            DataOutputStream sos = new DataOutputStream(os);
+            return eis.readUTF();
 
-            switch (opcion) {
-                case 1 -> {
-                    System.out.println("Recibiendo mensaje 1");
-
-                    sos.writeInt(Integer.parseInt(mensaje));
-                }
-                case 2 -> {
-                    System.out.println("Recibiendo mensaje 2");
-                    sos.writeInt(2);
-                    sos.writeInt(Integer.parseInt(mensaje));
-                }
-                case 3 -> {
-                    System.out.println("Recibiendo mensaje 3");
-                    sos.writeInt(3);
-                    sos.writeInt(Integer.parseInt(mensaje));
-                }
-                case 4 -> {
-                    System.out.println("Recibiendo mensaje 4");
-                    sos.writeInt(4);
-                    sos.writeInt(Integer.parseInt(mensaje));
-                }
-                case 5 -> {
-                    sos.writeInt(5);
-                    System.out.println("Cerrando el socket cliente");
-                    clienteSocket.close();
-                    System.out.println("Terminado");
-                }
-            }
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

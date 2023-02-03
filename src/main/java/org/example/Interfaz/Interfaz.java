@@ -9,10 +9,8 @@ import java.awt.event.ActionListener;
 
 public class Interfaz extends JFrame {
     private JButton btnPerezR, btnFurbo, btnJubilacion, btnGasofa, salir;
-
     JTextField editor;
     JLabel etiqueta;
-
     JFrame frameMenu = new JFrame();
 
     public Interfaz() {
