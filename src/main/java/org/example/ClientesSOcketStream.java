@@ -14,6 +14,7 @@ public class ClientesSOcketStream {
     public static void main(String[] args) {
         conexion();
         new Interfaz();
+        recibirMensaje();
 
     }
 
@@ -59,7 +60,7 @@ public class ClientesSOcketStream {
                     System.out.println("Enviando mensaje 4");
                     sos.writeInt(4);
                     sos.writeInt(Integer.parseInt(mensaje));
-                    recibirMensaje();
+                    //recibirMensaje();
                 }
                 case 5 -> {
                     System.out.println("Cerrando el socket cliente");
@@ -81,8 +82,11 @@ public class ClientesSOcketStream {
         try {
             InputStream is = clienteSocket.getInputStream();
             DataInputStream eis = new DataInputStream(is);
-            JOptionPane.showMessageDialog(null, eis.readUTF());
-            Interfaz.etiqueta.setText(eis.readUTF());
+            while(true){
+                //JOptionPane.showMessageDialog(null, eis.readUTF());
+                Interfaz.etiqueta.setText(eis.readUTF());
+            }
+
 
 
         } catch (IOException e) {
