@@ -16,6 +16,7 @@ public class ClientesSOcketStream {
         new Interfaz();
 
     }
+
     public static void conexion() {
 
         try {
@@ -35,25 +36,24 @@ public class ClientesSOcketStream {
 
             OutputStream os = clienteSocket.getOutputStream();
             DataOutputStream sos = new DataOutputStream(os);
-
             switch (opcion) {
                 case 1 -> {
                     System.out.println("Enviando mensaje 1");
                     sos.writeInt(1);
                     sos.writeInt(Integer.parseInt(mensaje));
-                    recibirMensaje();
+                    // recibirMensaje();
                 }
                 case 2 -> {
                     System.out.println("Enviando mensaje 2");
                     sos.writeInt(2);
                     sos.writeInt(Integer.parseInt(mensaje));
-                    recibirMensaje();
+                    //recibirMensaje();
                 }
                 case 3 -> {
                     System.out.println("Enviando mensaje 3");
                     sos.writeInt(3);
                     sos.writeInt(Integer.parseInt(mensaje));
-                    recibirMensaje();
+                    // recibirMensaje();
                 }
                 case 4 -> {
                     System.out.println("Enviando mensaje 4");
@@ -65,9 +65,10 @@ public class ClientesSOcketStream {
                     System.out.println("Cerrando el socket cliente");
                     clienteSocket.close();
                     System.out.println("Terminado");
-                    recibirMensaje();
+                    //recibirMensaje();
                 }
             }
+
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -75,13 +76,13 @@ public class ClientesSOcketStream {
 
     }
 
-    public static String recibirMensaje() {
+    public static void recibirMensaje() {
 
         try {
             InputStream is = clienteSocket.getInputStream();
             DataInputStream eis = new DataInputStream(is);
             JOptionPane.showMessageDialog(null, eis.readUTF());
-            return eis.readUTF();
+            Interfaz.etiqueta.setText(eis.readUTF());
 
 
         } catch (IOException e) {
