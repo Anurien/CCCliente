@@ -6,28 +6,51 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Interfaz extends JFrame {
     private JButton btnPerezR, btnFurbo, btnJubilacion, btnGasofa, salir;
     JTextField editor;
-     public static JLabel  etiqueta;
+     public static JLabel  etiqueta, titulo;
     JFrame frameMenu = new JFrame();
 
     public Interfaz() {
+
+        titulo = new JLabel();
+        titulo.setBounds(25, 30, 435, 70);
+        titulo.setVisible(true);
+        titulo.setIcon(new ImageIcon("cunados_logo1.png"));
+
 
         etiqueta = new JLabel();
         etiqueta.setBounds(25, 125, 435, 30);
         etiqueta.setToolTipText("Aqui va el resultado");
         etiqueta.setVisible(true);
         etiqueta.setBackground(Color.PINK);
+        etiqueta.setIcon(new ImageIcon("icono2.png"));
+        etiqueta.setIconTextGap(10);
         //etiqueta.setText(ClientesSOcketStream.recibirMensaje());
 
 
 
-        editor = new JTextField(); //Incilaizamos el editorPane
+        editor = new JTextField("Escribe un numero"); //Incilaizamos el editorPane
         editor.setBounds(25, 200, 435, 30);
         editor.setEditable(true); //Habilitamos la edicion
-        editor.setText(""); // Insertamos texto
+        editor.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                editor.setText("");
+            }
+            public void mouseReleased(MouseEvent e){
+                super.mouseClicked(e);
+                editor.setText("Escribe un número");
+            }
+        });
+        //editor.setText(""); // Insertamos texto
+        editor.setToolTipText("Escribe un número");
+
 
         btnPerezR = new JButton("Perez Reverte");
         btnPerezR.setBounds(25, 250, 120, 50);
@@ -63,12 +86,12 @@ public class Interfaz extends JFrame {
          * */
         frameMenu.setTitle(" Calculadora Cuñada ");
         /*
-         * creamos un panel y le añadimos los botones de ayuda e inicio
+         * creamos un panel y le añadimos los botones
          * */
         JPanel panelMenu = new JPanel();
         panelMenu.setOpaque(false);
         panelMenu.setLayout(null);
-        panelMenu.setBounds(0, 0, 510, 400);
+        panelMenu.setBounds(0, 0, 485, 400);
 
         panelMenu.add(btnPerezR);
         panelMenu.add(btnFurbo);
@@ -77,6 +100,7 @@ public class Interfaz extends JFrame {
         panelMenu.add(editor);
         panelMenu.add(salir);
         panelMenu.add(etiqueta);
+        panelMenu.add(titulo);
 
         /*
          * Dentro de la venatana de inicio de menu colocamos los botones
@@ -86,7 +110,7 @@ public class Interfaz extends JFrame {
         /*
          *  Asignamos tamaño de la ventana
          * */
-        frameMenu.setSize(510, 400);
+        frameMenu.setSize(485, 400);
         /*
          *  Centra la ventana al medio de la pantalla
          * */

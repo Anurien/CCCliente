@@ -1,8 +1,6 @@
 package org.example;
 
 import org.example.Interfaz.Interfaz;
-
-import javax.swing.*;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -42,31 +40,26 @@ public class ClientesSOcketStream {
                     System.out.println("Enviando mensaje 1");
                     sos.writeInt(1);
                     sos.writeInt(Integer.parseInt(mensaje));
-                    // recibirMensaje();
                 }
                 case 2 -> {
                     System.out.println("Enviando mensaje 2");
                     sos.writeInt(2);
                     sos.writeInt(Integer.parseInt(mensaje));
-                    //recibirMensaje();
                 }
                 case 3 -> {
                     System.out.println("Enviando mensaje 3");
                     sos.writeInt(3);
                     sos.writeInt(Integer.parseInt(mensaje));
-                    // recibirMensaje();
                 }
                 case 4 -> {
                     System.out.println("Enviando mensaje 4");
                     sos.writeInt(4);
                     sos.writeInt(Integer.parseInt(mensaje));
-                    //recibirMensaje();
                 }
                 case 5 -> {
                     System.out.println("Cerrando el socket cliente");
                     clienteSocket.close();
                     System.out.println("Terminado");
-                    //recibirMensaje();
                 }
             }
 
